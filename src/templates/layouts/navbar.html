@@ -1,30 +1,44 @@
 {% from "macros.html" import create_navlink %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary" >
-    <div class="container">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <a class="circle-image" href="{{ url_for('main.index') }}">
-                <img src="{{ url_for('static', filename='img/Zlogo.png') }}" alt="Image">
-            </a>
-            <div class="collapse navbar-collapse" id="navbarButtonsExample">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary" style="height: 3.5rem;">
+    <div class="container-lg">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">GNSMC</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-start flex-grow-1 pe-3" id="navLinksStart">
                     <li class="nav-item">
-                        {{ create_navlink('main.index', 'Home') }}
+                        <a class="img" href="{{ url_for('main.index') }}">
+                            <img  style="width: 60px; height: 60px;" src="{{ url_for('static', filename='img/Zlogo.png') }}" alt="Image">
+                        </a>
                     </li>
                 </ul>
-                <div class="d-flex align-items-center">
-                    {% if user_type == "admin" %}
-                        <a href="#" class="btn btn-primary me-3">
-                            Questions
-                        </a>
-                    {% endif %}
-                    <a href="#" class="btn btn-primary me-3">
-                        Login
-                    </a>
-                    <a href="#" class="btn btn-primary me-3">
-                        Sign up for free
-                    </a>
-                </div>
+                <ul class="navbar-nav justify-content-end align-items-center flex-grow-1 pe-3" id="navLinksEnd">
+                    <li class="nav-item">
+                        {% if current_user.is_authenticated and current_user.role.name != "member" %}
+                        <li class="nav-item">
+                            <a class="btn btn-primary m-1" href="#">Dashboard</a>
+                        </li>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                            <li class="nav-item">
+                                {{ create_navlink('auth.logout', 'გასვლა') }}
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                {{ create_navlink('auth.login', 'შესვლა') }}
+                            </li>
+                            <li class="nav-item">
+                                {{ create_navlink('auth.register', 'რეგისტრაცია') }}
+                            </li>
+                        {% endif %}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
