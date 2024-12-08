@@ -1,5 +1,10 @@
+import os
+import uuid
+from flask import current_app
+from sqlalchemy.orm import validates
 from src.extensions import db
 from src.models.base import BaseModel
+from src.config import Config
 
 
 class Slides(db.Model, BaseModel):

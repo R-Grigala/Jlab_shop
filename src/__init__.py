@@ -1,9 +1,12 @@
 from flask import Flask
-from src.extensions import db, migrate, login_manager
+from flask_admin.menu import MenuLink
+
+from src.admin import SlidesView, UserView
+from src.extensions import db, migrate, login_manager, admin
 from src.config import Config
 from src.commands import init_db_command, populate_db_command
 from src.views import main_blueprint, auth_blueprint
-from src.models import User
+from src.models import User, Slides
 
 BLUEPRINTS = [main_blueprint, auth_blueprint]
 COMMANDS = [init_db_command, populate_db_command]
@@ -40,12 +43,11 @@ def register_extensions(app):
         return db.session.get(User, int(user_id))
     
     # Flask-Admin
-    # admin.init_app(app)
-    # admin.add_view(UserView(User, db.session))
-    # admin.add_view(QuestionView(Question, db.session))
-    # admin.add_view(QuizView(Quiz, db.session))
+    admin.init_app(app)
+    admin.add_view(UserView(User, db.session))
+    admin.add_view(SlidesView(Slides, db.session))
 
-    # admin.add_link(MenuLink("Return", url="/", icon_type="fa", icon_value="fa-sign-out"))
+    admin.add_link(MenuLink("Return", url="/", icon_type="fa", icon_value="fa-sign-out"))
 
 def register_blueprints(app):
     for blueprint in BLUEPRINTS:

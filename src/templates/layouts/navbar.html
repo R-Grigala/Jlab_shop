@@ -22,7 +22,7 @@
                     <li class="nav-item">
                         {% if current_user.is_authenticated and current_user.role.name != "member" %}
                         <li class="nav-item">
-                            <a class="btn btn-primary m-1" href="#">Dashboard</a>
+                            <a class="btn btn-primary m-1" href="/admin/slides/">Dashboard</a>
                         </li>
                         {% endif %}
                         {% if current_user.is_authenticated %}
