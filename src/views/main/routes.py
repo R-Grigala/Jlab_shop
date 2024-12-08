@@ -3,7 +3,7 @@ from os import path
 
 from src.config import Config
 
-TEMPLATES_FOLDER = path.join(Config.BASE_DIRECTORY, "templates", "main")
+TEMPLATES_FOLDER = path.join(Config.BASE_DIR, "templates", "main")
 main_blueprint = Blueprint("main", __name__, template_folder=TEMPLATES_FOLDER)
 
 @main_blueprint.route("/")

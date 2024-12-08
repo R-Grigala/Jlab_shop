@@ -1,11 +1,12 @@
 import uuid
+from flask_login import UserMixin
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from src.extensions import db
 from src.models.base import BaseModel
 
 # ONE - TO - ONE relationship
-class User(db.Model, BaseModel):
+class User(db.Model, BaseModel, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)

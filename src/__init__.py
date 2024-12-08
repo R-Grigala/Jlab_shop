@@ -1,11 +1,12 @@
 from flask import Flask
 from src.extensions import db, migrate, login_manager
 from src.config import Config
-from src.commands import init_db
+from src.commands import init_db_command, populate_db_command
 from src.views import main_blueprint, auth_blueprint
+from src.models import User
 
 BLUEPRINTS = [main_blueprint, auth_blueprint]
-COMMANDS = [init_db]
+COMMANDS = [init_db_command, populate_db_command]
 
 def create_app():
 
@@ -37,6 +38,14 @@ def register_extensions(app):
     @login_manager.user_loader
     def load_user(user_id):
         return db.session.get(User, int(user_id))
+    
+    # Flask-Admin
+    # admin.init_app(app)
+    # admin.add_view(UserView(User, db.session))
+    # admin.add_view(QuestionView(Question, db.session))
+    # admin.add_view(QuizView(Quiz, db.session))
+
+    # admin.add_link(MenuLink("Return", url="/", icon_type="fa", icon_value="fa-sign-out"))
 
 def register_blueprints(app):
     for blueprint in BLUEPRINTS:

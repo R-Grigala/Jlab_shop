@@ -8,7 +8,7 @@ from src.models import User
 from os import path
 
 
-TEMPLATES_FOLDER = path.join(Config.BASE_DIRECTORY, "templates", "auth")
+TEMPLATES_FOLDER = path.join(Config.BASE_DIR, "templates", "auth")
 auth_blueprint = Blueprint("auth", __name__, template_folder=TEMPLATES_FOLDER)
 
 

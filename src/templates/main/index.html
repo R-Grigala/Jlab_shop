@@ -6,19 +6,80 @@
 
 {% block body %}
 
-    <div class="d-flex flex-column align-items-center justify-content-center">
-        <h1>Quick Quiz</h1>
-        
-        <p>მომხმარებლებს შეუძლიათ დაწერონ ქვიზები სხვადასხვა საგნებში და მიიღონ ქულები,
-            <br>ქულების დაგროვების შემდეგ კი მოხვდებიან საიტის მთავარ ცხრილში.
-            <br>ქვიზის დაწერა შესაძლებელია სხვადასხვა საგნებში:
-        </p>
-            <ul>
-                <li>მათემატიკა</li>
-                <li>ისტორია</li>
-                <li>გეოგრაფია</li>
+    <div class="d-flex flex-column align-items-start justify-content-start">
+        <!-- Default dropright button -->
+        <div class="btn-group dropend">
+            <button
+                type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Dropright
+            </button>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="#">Separated link</a></li>
             </ul>
-        <a class="cus_btn" href="#">High Scores</a>
+        </div>
+    
+        <!-- Default dropright button -->
+        <div class="btn-group dropend">
+            <button
+                type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Dropright
+            </button>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="#">Separated link</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column align-items-center justify-content-center">
+
+        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                {% for slide in slides %}
+                <button 
+                    type="button" 
+                    data-bs-target="#imageCarousel" 
+                    data-bs-slide-to="{{ loop.index0 }}" 
+                    class="{% if loop.first %}active{% endif %}" 
+                    aria-current="{% if loop.first %}true{% endif %}" 
+                    aria-label="Slide {{ loop.index }}">
+                </button>
+                {% endfor %}
+            </div>
+    
+            <!-- Carousel Items -->
+            <div class="carousel-inner">
+                {% for slide in slides %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <a href="{{ slide.slideUrl }}">
+                        <img src="{{ slide.imgPath }}" class="d-block w-100" alt="Slide {{ loop.index }}">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+    
+            <!-- Navigation Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
 
 {% endblock %}
