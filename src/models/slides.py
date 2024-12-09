@@ -3,6 +3,7 @@ from src.models.base import BaseModel
 
 
 class Slides(db.Model, BaseModel):
+    __tablename__ = "slides"
     id = db.Column(db.Integer, primary_key=True)
     slideName = db.Column(db.String(255), nullable=False)
     slidePath = db.Column(db.String(255), nullable=False)

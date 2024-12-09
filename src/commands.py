@@ -2,7 +2,7 @@ from flask.cli import with_appcontext
 import click
 
 from src.extensions import db
-from src.models import User, Role
+from src.models import User, Role, Category
 
 @click.command("init_db")
 @with_appcontext
@@ -42,3 +42,9 @@ def populate_db():
         role_id=1
     )
     admin_user.create()
+
+
+    # Create Category
+    click.echo("Creating Category")
+    category = Category(category_name_en='Phones', category_name_ka ='ტელეფონები')
+    category.create()
