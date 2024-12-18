@@ -22,3 +22,11 @@ class ProductsView(SecureModelView):
             'get_label': 'category_name_en',  # Use English name as label
         }
     }
+
+class CategoriesView(SecureModelView):
+    column_list = ['category_name_en', 'category_name_ka']  # Display in list view
+    column_labels = {
+        'category_name_en': 'Category (English)',
+        'category_name_ka': 'Category (Georgian)',
+    }
+    form_columns = ['category_name_en', 'category_name_ka']

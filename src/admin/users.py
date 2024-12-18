@@ -10,4 +10,3 @@ class UserView(SecureModelView):
     }
 
     column_editable_list = ["role"]
-    form_columns = ["role"]

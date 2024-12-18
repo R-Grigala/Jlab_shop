@@ -1,12 +1,12 @@
 from flask import Flask
 from flask_admin.menu import MenuLink
 
-from src.admin import SlidesView, UserView, ProductsView
+from src.admin import SlidesView, UserView, ProductsView, CategoriesView
 from src.extensions import db, migrate, login_manager, admin
 from src.config import Config
 from src.commands import init_db_command, populate_db_command
 from src.views import main_blueprint, auth_blueprint, uploads_blueprint
-from src.models import User, Slides, Products
+from src.models import User, Slides, Products, Category
 
 BLUEPRINTS = [main_blueprint, auth_blueprint, uploads_blueprint]
 COMMANDS = [init_db_command, populate_db_command]
@@ -47,6 +47,7 @@ def register_extensions(app):
     admin.add_view(UserView(User, db.session))
     admin.add_view(SlidesView(Slides, db.session))
     admin.add_view(ProductsView(Products, db.session))
+    admin.add_view(CategoriesView(Category, db.session))
 
     admin.add_link(MenuLink("Return", url="/", icon_type="fa", icon_value="fa-sign-out"))
 
