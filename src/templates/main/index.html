@@ -6,18 +6,17 @@
 
 {% block body %}
 <div class="d-flex">
-    <div class="card border border-dark shadow-0 me-3">
+    <div class="card me-3" style="width: 18rem;">
         <div class="card-body text-center">
             {% for category in categories %}
-            <div class="col btn-group btn-group-sm dropend mb-2">
+            <div class="dropend mb-2">
                 <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                     {{ category.category_name_en }}
                 </button>
                 <ul class="dropdown-menu ms-3">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    {% for brand in category.brands %}
+                    <li><a class="dropdown-item" href="#">{{ brand.brands_name_en }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
             {% endfor %}

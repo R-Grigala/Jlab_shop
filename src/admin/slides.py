@@ -1,4 +1,5 @@
 from flask_admin.form import FileUploadField, ImageUploadInput
+from flask_admin.model.form import InlineFormAdmin
 import os
 import uuid
 
